@@ -1,0 +1,6 @@
+---
+- name: install quagga
+  yum:
+    name: quagga
+    state: present
+...

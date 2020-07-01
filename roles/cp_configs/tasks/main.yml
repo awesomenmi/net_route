@@ -1,0 +1,94 @@
+---
+- name: Copy daemons file for {{ ansible_hostname }}
+  copy:
+    src: daemons
+    dest: /etc/quagga/daemons
+
+- name: Copy ifcfg files for {{ ansible_hostname }}
+  copy: 
+    src: ifcfg-vlan12-r1
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan12
+  when: ansible_hostname == "R1"
+
+- name:	Copy ifcfg files for {{	ansible_hostname }}
+  copy:	
+    src: ifcfg-vlan13-r1
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan13
+  when:	ansible_hostname == "R1"
+
+- name: Copy zebra file for {{ ansible_hostname }}
+  copy:
+    src: r1-zebra.conf
+    dest: /etc/quagga/zebra.conf
+    owner: quagga
+    group: quagga
+  when: ansible_hostname == "R1"
+
+- name: Copy ospfd file for {{ ansible_hostname }}
+  copy:
+    src: r1-ospfd.conf  
+    dest: /etc/quagga/ospfd.conf
+    owner: quagga
+    group: quaggavt
+  when: ansible_hostname == "R1"
+
+- name:	Copy ifcfg files for {{	ansible_hostname }}
+  copy:	
+    src: ifcfg-vlan12-r2
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan12
+  when:	ansible_hostname == "R2"
+
+- name: Copy ifcfg files for {{ ansible_hostname }}
+  copy:
+    src: ifcfg-vlan23-r2
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan23
+  when: ansible_hostname == "R2"
+
+- name: Copy zebra file for {{ ansible_hostname }}
+  copy:
+    src: r2-zebra.conf  
+    dest: /etc/quagga/zebra.conf
+    owner: quagga
+    group: quagga
+  when: ansible_hostname == "R2"
+
+- name: Copy ospfd file for {{ ansible_hostname }}
+  copy:
+    src: r2-ospfd.conf
+    dest: /etc/quagga/ospfd.conf
+    owner: quagga
+    group: quaggavt
+  when: ansible_hostname == "R2"
+
+- name:	Copy ifcfg files for {{	ansible_hostname }}
+  copy:	
+    src: ifcfg-vlan13-r3
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan13
+  when:	ansible_hostname == "R3"
+
+- name: Copy ifcfg files for {{ ansible_hostname }}
+  copy:
+    src: ifcfg-vlan23-r3
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan23
+  when: ansible_hostname == "R3"
+
+- name: Copy zebra file for {{ ansible_hostname }}
+  copy:
+    src: r3-zebra.conf 
+    dest: /etc/quagga/zebra.conf
+    owner: quagga
+    group: quagga
+  when: ansible_hostname == "R3"
+
+- name: Copy ospfd file for {{ ansible_hostname }}
+  copy:
+    src: r3-ospfd.conf
+    dest: /etc/quagga/ospfd.conf
+    owner: quagga
+    group: quaggavt
+  when: ansible_hostname == "R3"
+
+
+
+
+

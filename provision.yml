@@ -1,0 +1,11 @@
+---
+- name: Setup
+  hosts: all
+  become: true
+  gather_facts: True
+  roles:
+    - quagga
+    - cp_configs
+    - net
+    - restart
+ 

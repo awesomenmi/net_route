@@ -1,0 +1,24 @@
+---
+- name: Restart network on {{ ansible_hostname }}
+  service: 
+    name: network
+    state: restarted
+
+- name: Enable zebra and ospfd on {{ ansible_hostname }}
+  service:
+    name: "{{ item }}"
+    enabled: yes
+  with_items: 
+    - zebra
+    - ospfd
+
+- name:	Start  zebra and ospfd on {{ ansible_hostname }}
+  service: 
+    name: "{{ item }}"
+    state: started
+  with_items: 
+    - zebra
+    - ospfd
+
+
+
