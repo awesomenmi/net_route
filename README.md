@@ -2,7 +2,7 @@
 
 Схема стенда:
 
-![alt-текст](https://github.com/awesomenmi/net_route/blob/master/Untitled%20Diagram.png)
+![alt-текст](https://github.com/awesomenmi/net_route/blob/master/Untitled%20Diagram%20(2).png)
 
 Вывод команды _ip a_:
 ### R1
@@ -138,9 +138,9 @@
 interface vlanXX
 ip ospf cost XXX
 ```
-и перезапустить службу ```systemctl restart ospfd```
 
-Например, содержимое файла для R1:
+
+Пример содержимого файла для R1:
 ```
 hostname R1
 
@@ -159,7 +159,7 @@ log file /var/log/quagga/ospfd.log
 
 Для __симметричного роутинга с дорогим линком__, необходимо изменить "стоимость" интерфейсов в одном VLAN-e, например в VLAN13, то есть для роутеров R1 и R3.
 
-Содержимое файла для R3:
+Пример содержимого файла для R3:
 ```
 hostname R3
 
