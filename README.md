@@ -149,7 +149,6 @@ router ospf
     network 192.168.12.0/30 area 0
     network 192.168.13.0/30 area 0
     network 10.1.0.0/24 area 1
-    redistribute connected
 
 interface vlan13
 ip ospf cost 300
@@ -168,7 +167,6 @@ router ospf
     network 192.168.13.0/30 area 0
     network 192.168.23.0/30 area 0
     network 10.3.0.0/24 area 3
-    redistribute connected
 
 interface vlan13
 ip ospf cost 300
