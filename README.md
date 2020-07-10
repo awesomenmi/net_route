@@ -1,5 +1,8 @@
 # Статическая и динамическая маршрутизация
 
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+
 Схема стенда:
 
 ![alt-текст](https://github.com/awesomenmi/net_route/blob/master/Untitled%20Diagram%20(2).png)
