@@ -5,3 +5,34 @@
   - net.ipv4.conf.all.forwarding=1
   - net.ipv4.ip_forward=1
   - net.ipv4.conf.all.rp_filter=0
+
+#- name: Echo DEFROUTE=no to ifcfg-eth0 on {{ ansible_hostname }}
+#  shell: echo 'DEFROUTE=no' >> /etc/sysconfig/network-scripts/ifcfg-eth0
+#  when: ansible_hostname == "R2" or ansible_hostname == "R3"
+
+- name: IP forward on R1
+  command: echo 1 > /proc/sys/net/ipv4/ip_forward
+  when: ansible_hostname == "R1"
+
+- name: Add lo:2 inteface
+  copy:
+    src: r1-ifcfg-lo.2
+    dest: /etc/sysconfig/network-scripts/ifcfg-lo.2
+  when: ansible_hostname == "R1"
+
+- name:	Add lo:2 inteface
+  copy:
+    src: r3-ifcfg-lo.2
+    dest: /etc/sysconfig/network-scripts/ifcfg-lo.2
+  when:	ansible_hostname == "R2"
+
+- name:	Add lo:2 inteface
+  copy:
+    src: r2-ifcfg-lo.2
+    dest: /etc/sysconfig/network-scripts/ifcfg-lo.2
+  when:	ansible_hostname  == "R3"
+
+- name: Restart network
+  service:
+    name: network
+    state: restarted

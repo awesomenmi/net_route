@@ -45,23 +45,23 @@ Vagrant.configure("2") do |config|
         config.vm.provider "virtualbox" do |v|
           v.memory = 256
         end
-
+          
         boxconfig[:net].each do |ipconf|
           box.vm.network "private_network", ipconf
         end
-        
-        if boxconfig.key?(:public)
-          box.vm.network "public_network", boxconfig[:public]
+          	
+        case boxname.to_s
+        when "R1"
+          box.vm.provision "shell", inline: <<-SHELL
+            iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+            echo 1 > /proc/sys/net/ipv4/ip_forward
+          SHELL
         end
-
-        box.vm.provision "shell", inline: <<-SHELL
-          mkdir -p ~root/.ssh
-                cp ~vagrant/.ssh/auth* ~root/.ssh
-        SHELL
-     end
+      end
   end
 
   config.vm.provision "ansible" do |ansible|
   	ansible.playbook = "provision.yml"
+	ansible.verbose = "vv"
   end
 end
