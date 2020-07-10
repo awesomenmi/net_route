@@ -1,5 +1,8 @@
 # Статическая и динамическая маршрутизация
 
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+
 Схема стенда:
 
 ![alt-текст](https://github.com/awesomenmi/net_route/blob/master/Untitled%20Diagram%20(2).png)
@@ -149,7 +152,6 @@ router ospf
     network 192.168.12.0/30 area 0
     network 192.168.13.0/30 area 0
     network 10.1.0.0/24 area 1
-    redistribute connected
 
 interface vlan13
 ip ospf cost 300
@@ -168,7 +170,6 @@ router ospf
     network 192.168.13.0/30 area 0
     network 192.168.23.0/30 area 0
     network 10.3.0.0/24 area 3
-    redistribute connected
 
 interface vlan13
 ip ospf cost 300
